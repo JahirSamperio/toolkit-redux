@@ -1,5 +1,5 @@
 // Importa las funciones necesarias de @reduxjs/toolkit/query
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // Define una API utilizando la función createApi
 export const todosApi = createApi({
@@ -18,10 +18,13 @@ export const todosApi = createApi({
         getTodos: builder.query({
             // La función query especifica la URL a la que se hará la solicitud
             query: () => '/todos'  // La URL completa sería 'http://jsonplaceholder.typicode.com/todos'
+        }),
+        getTodo: builder.query({
+            query: (todoId) => `/todos/${todoId}`
         })
     })
 })
 
 // Exporta el hook 'useGetTodosQuery', que es generado automáticamente por RTK Query
 // Este hook se usará en los componentes de React para realizar la solicitud y obtener los datos
-export const { useGetTodosQuery } = todosApi;
+export const { useGetTodosQuery, useGetTodoQuery } = todosApi;
